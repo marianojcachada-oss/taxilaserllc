@@ -7,8 +7,8 @@ app.use(express.json());
 
 // Credenciales del bot de Azure
 const adapter = new BotFrameworkAdapter({
-    appId: process.env.MICROSOFT_APP_ID,
-    appPassword: process.env.MICROSOFT_APP_PASSWORD
+    appId: process.env.a2096582-bf9e-4520-ab9d-9d51d1ea1be1,
+    appPassword: process.env.53e694f5-9c69-49cd-b644-9c06bfb22463
 });
 
 // Bot logic
