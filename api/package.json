@@ -1,9 +1,0 @@
-
-{
-  "name": "teams-bot-vercel",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "botbuilder": "^4.22.0"
-  }
-}
