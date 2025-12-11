@@ -38,20 +38,17 @@ const bot = {
         console.log("📨 ACTIVITY COMPLETA:", JSON.stringify(context.activity, null, 2));
 
         const text = context.activity.text?.trim()?.toLowerCase() || "";
-
         console.log("📩 Mensaje recibido:", text);
 
         // Comando principal
         if (text === "/crearreporte") {
             console.log("➡️ Ejecutando /crearreporte");
 
-            // EXTRAEMOS TODOS LOS DATOS IMPORTANTES DE TEAMS
+            // Datos enviados al Flow
             const payload = {
                 usuario: context.activity.from.name,
                 message: text,
                 fecha: new Date().toISOString(),
-
-                // 🔥 ESTO ES LO QUE POWER AUTOMATE NECESITA
                 teamsUserId: context.activity.from.id || null,
                 aadObjectId: context.activity.from.aadObjectId || null,
                 conversationId: context.activity.conversation?.id || null,
@@ -74,19 +71,31 @@ const bot = {
                 const raw = await respuesta.text();
                 console.log("📥 Respuesta RAW del Flow:", raw);
 
-                // Si no es JSON válido, no intentamos parsear
+                // Intentamos parsear JSON
                 let card = null;
                 try {
                     card = JSON.parse(raw);
                 } catch {
-                    console.log("⚠️ El Flow no devolvió JSON.");
+                    console.log("⚠️ El Flow no devolvió JSON válido.");
                 }
 
-                // Si el Flow devuelve AdaptiveCard, enviamos
+                // Si el Flow devuelve tarjeta
                 if (card?.attachments?.[0]) {
+                    const original = card.attachments[0];
+
+                    // 🔥 FIX FINAL PARA TEAMS
+                    const attachment = {
+                        contentType: original.contentType,
+                        content: original.content,
+                        contentUrl: null // ← obligatorio en MS Teams personal scope
+                    };
+
+                    console.log("📤 Enviando Adaptive Card final al usuario...");
+
                     await context.sendActivity({
-                        attachments: [card.attachments[0]]
+                        attachments: [attachment]
                     });
+
                 } else {
                     await context.sendActivity("El Flow respondió pero no devolvió una Adaptive Card.");
                 }
