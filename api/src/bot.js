@@ -24,7 +24,7 @@ export class TeamsBot {
         };
 
         // Llamada HTTP al Flow (trigger HTTP)
-        const flowUrl = process.env.PA_FLOW_URL;        // URL del trigger "When an HTTP request is received"
+        const flowUrl = process.env.PA_FLOW_URL; "https://defaultc8aebb6cc6aa405da76b057a64fbdc.17.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/dfddeee54d7e4ec7b070b66cbb27e3c8/triggers/manual/paths/invoke?api-version=1"
         const flowKey = process.env.PA_FLOW_KEY || '';  // Si proteges con una key propia
 
         try {
