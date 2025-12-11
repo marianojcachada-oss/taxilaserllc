@@ -34,6 +34,9 @@ adapter.onTurnError = async (context, error) => {
 // -----------------------------
 const bot = {
     async run(context) {
+
+        console.log("📨 ACTIVITY COMPLETA:", JSON.stringify(context.activity, null, 2));
+
         const text = context.activity.text?.trim()?.toLowerCase() || "";
 
         console.log("📩 Mensaje recibido:", text);
@@ -41,32 +44,55 @@ const bot = {
         // Comando principal
         if (text === "/crearreporte") {
             console.log("➡️ Ejecutando /crearreporte");
+
+            // EXTRAEMOS TODOS LOS DATOS IMPORTANTES DE TEAMS
+            const payload = {
+                usuario: context.activity.from.name,
+                message: text,
+                fecha: new Date().toISOString(),
+
+                // 🔥 ESTO ES LO QUE POWER AUTOMATE NECESITA
+                teamsUserId: context.activity.from.id || null,
+                aadObjectId: context.activity.from.aadObjectId || null,
+                conversationId: context.activity.conversation?.id || null,
+                serviceUrl: context.activity.serviceUrl || null
+            };
+
+            console.log("📦 Payload enviado al Flow:", payload);
+
             try {
-                console.log("➡️ Enviando datos al Flow:", process.env.PA_FLOW_URL);
+                console.log("➡️ Llamando al Flow:", process.env.PA_FLOW_URL);
 
                 const respuesta = await fetch(process.env.PA_FLOW_URL, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        usuario: context.activity.from.name,
-                        message: text,
-                        fecha: new Date().toISOString()
-                    })
+                    body: JSON.stringify(payload)
                 });
 
                 console.log("➡️ Status Flow:", respuesta.status);
 
-                if (!respuesta.ok) {
-                    throw new Error(`Flow devolvió código ${respuesta.status}`);
+                const raw = await respuesta.text();
+                console.log("📥 Respuesta RAW del Flow:", raw);
+
+                // Si no es JSON válido, no intentamos parsear
+                let card = null;
+                try {
+                    card = JSON.parse(raw);
+                } catch {
+                    console.log("⚠️ El Flow no devolvió JSON.");
                 }
 
-                const card = await respuesta.json();
-
-                await context.sendActivity({
-                    attachments: [card.attachments[0]]
-                });
+                // Si el Flow devuelve AdaptiveCard, enviamos
+                if (card?.attachments?.[0]) {
+                    await context.sendActivity({
+                        attachments: [card.attachments[0]]
+                    });
+                } else {
+                    await context.sendActivity("El Flow respondió pero no devolvió una Adaptive Card.");
+                }
 
                 return;
+
             } catch (err) {
                 console.error("❌ Error llamando al Flow:", err);
                 await context.sendActivity("⚠️ No pude contactar a Power Automate.");
