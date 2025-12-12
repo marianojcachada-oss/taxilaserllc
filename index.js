@@ -45,44 +45,15 @@ const bot = {
             console.log("➡️ Ejecutando /crearreporte");
 
             // Datos enviados al Flow
-           const payload = {
-    type: "message",
-    
-    from: {
-        id: context.activity.from.id,
-        name: context.activity.from.name,
-        aadObjectId: context.activity.from.aadObjectId
-    },
-
-    conversation: {
-        id: context.activity.conversation.id
-    },
-
-    serviceUrl: context.activity.serviceUrl,
-
-    text: text,
-    fecha: new Date().toISOString()
-};
-const payload = {
-    type: "message",
-
-    from: {
-        id: context.activity.from.id,
-        name: context.activity.from.name,
-        aadObjectId: context.activity.from.aadObjectId,
-        upn: context.activity.from.userPrincipalName || null
-    },
-
-    conversation: {
-        id: context.activity.conversation.id
-    },
-
-    serviceUrl: context.activity.serviceUrl,
-
-    text: text,
-    fecha: new Date().toISOString()
-};
-
+            const payload = {
+                usuario: context.activity.from.name,
+                message: text,
+                fecha: new Date().toISOString(),
+                teamsUserId: context.activity.from.id || null,
+                aadObjectId: context.activity.from.aadObjectId || null,
+                conversationId: context.activity.conversation?.id || null,
+                serviceUrl: context.activity.serviceUrl || null
+            };
 
             console.log("📦 Payload enviado al Flow:", payload);
 
@@ -112,11 +83,11 @@ const payload = {
                 if (card?.attachments?.[0]) {
                     const original = card.attachments[0];
 
-                    // 🔥 FIX FINAL PARA TEAMS
+                    // 🔥 FIX FINAL PARA TEAMS (personal chat)
                     const attachment = {
                         contentType: original.contentType,
                         content: original.content,
-                        contentUrl: null // ← obligatorio en MS Teams personal scope
+                        contentUrl: null
                     };
 
                     console.log("📤 Enviando Adaptive Card final al usuario...");
