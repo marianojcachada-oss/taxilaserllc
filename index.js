@@ -45,15 +45,25 @@ const bot = {
             console.log("➡️ Ejecutando /crearreporte");
 
             // Datos enviados al Flow
-            const payload = {
-                usuario: context.activity.from.name,
-                message: text,
-                fecha: new Date().toISOString(),
-                teamsUserId: context.activity.from.id || null,
-                aadObjectId: context.activity.from.aadObjectId || null,
-                conversationId: context.activity.conversation?.id || null,
-                serviceUrl: context.activity.serviceUrl || null
-            };
+           const payload = {
+    type: "message",
+    
+    from: {
+        id: context.activity.from.id,
+        name: context.activity.from.name,
+        aadObjectId: context.activity.from.aadObjectId
+    },
+
+    conversation: {
+        id: context.activity.conversation.id
+    },
+
+    serviceUrl: context.activity.serviceUrl,
+
+    text: text,
+    fecha: new Date().toISOString()
+};
+
 
             console.log("📦 Payload enviado al Flow:", payload);
 
