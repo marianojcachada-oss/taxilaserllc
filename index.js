@@ -63,6 +63,25 @@ const bot = {
     text: text,
     fecha: new Date().toISOString()
 };
+const payload = {
+    type: "message",
+
+    from: {
+        id: context.activity.from.id,
+        name: context.activity.from.name,
+        aadObjectId: context.activity.from.aadObjectId,
+        upn: context.activity.from.userPrincipalName || null
+    },
+
+    conversation: {
+        id: context.activity.conversation.id
+    },
+
+    serviceUrl: context.activity.serviceUrl,
+
+    text: text,
+    fecha: new Date().toISOString()
+};
 
 
             console.log("📦 Payload enviado al Flow:", payload);
