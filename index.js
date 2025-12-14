@@ -3,13 +3,13 @@ const fetch = require("node-fetch");
 const {
     CloudAdapter,
     ConfigurationServiceClientCredentialFactory,
-    createBotFrameworkAuthenticationFromConfiguration
+    createBotFrameworkAuthenticationFromConfiguration,
+    CardFactory
 } = require("botbuilder");
 
 const app = express();
 app.use(express.json());
 
-// Endpoint para evitar que Render duerma
 app.get("/", (req, res) => res.status(200).send("TaxiLaser Bot OK"));
 
 // Credenciales del bot
@@ -23,15 +23,69 @@ const credentialsFactory = new ConfigurationServiceClientCredentialFactory({
 const botFrameworkAuthentication = createBotFrameworkAuthenticationFromConfiguration(null, credentialsFactory);
 const adapter = new CloudAdapter(botFrameworkAuthentication);
 
-// Manejo global de errores
+// Errores globales
 adapter.onTurnError = async (context, error) => {
     console.error("❌ Error:", error);
     await context.sendActivity("⚠️ Ocurrió un error.");
 };
 
-// -----------------------------
+// ----------------------------------
+// TU ADAPTIVE CARD JSON (TAL CUAL)
+// ----------------------------------
+const reporteCardJson = {
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.4",
+  "body": [
+    { "type": "TextBlock","text": "📋 Crear Reporte TaxiLaser","weight": "Bolder","size": "Large" },
+
+    { "type": "Input.ChoiceSet","id": "categoria","label": "Categoría del reporte","style": "compact",
+      "choices": [
+        { "title": "Deuda", "value": "Deuda" },
+        { "title": "Saldo a favor", "value": "Saldo a favor" },
+        { "title": "Warning", "value": "Warning" },
+        { "title": "Multa", "value": "Multa" }
+      ],
+      "value": "Deuda"
+    },
+
+    { "type": "Input.Text","id": "unidad","label": "Número de unidad","placeholder": "Ej: D026" },
+    { "type": "Input.Text","id": "id_servicio","label": "ID de servicio (opcional)","placeholder": "Si aplica" },
+    { "type": "Input.Text","id": "nombre_cliente","label": "Nombre del cliente" },
+    { "type": "Input.Text","id": "telefono_cliente","label": "Teléfono del cliente" },
+    { "type": "Input.Text","id": "observacion","label": "Observación","isMultiline": true },
+
+    {
+      "type": "Input.ChoiceSet",
+      "id": "notificar",
+      "label": "Notificar a:",
+      "isMultiSelect": true,
+      "choices": [
+        { "title": "PRINCIPALES", "value": "PRINCIPALES" },
+        { "title": "TAXIMETRO", "value": "TAXIMETRO" },
+        { "title": "MANAGERS", "value": "MANAGERS" },
+        { "title": "ADMINISTRACION", "value": "ADMINISTRACION" },
+        { "title": "SUPERVISORES", "value": "SUPERVISORES" },
+        { "title": "REPORTES", "value": "REPORTES" }
+      ]
+    },
+
+    {
+      "type": "TextBlock",
+      "text": "📎 Si querés adjuntar imágenes: responde a este mismo post con los archivos. El sistema las tomará automáticamente.",
+      "wrap": true,
+      "size": "Small",
+      "color": "accent"
+    }
+  ],
+  "actions": [
+    { "type": "Action.Submit", "title": "Enviar Reporte" }
+  ]
+};
+
+// ----------------------------------
 // BOT LOGIC
-// -----------------------------
+// ----------------------------------
 const bot = {
     async run(context) {
 
@@ -40,89 +94,57 @@ const bot = {
         const text = context.activity.text?.trim()?.toLowerCase() || "";
         console.log("📩 Mensaje recibido:", text);
 
-        // Comando principal
-        if (text === "/crearreporte") {
-            console.log("➡️ Ejecutando /crearreporte");
+        // 1️⃣ Comando: /crearreporte
+        if (context.activity.type === "message" && text === "/crearreporte") {
 
-            // Datos enviados al Flow
+            console.log("➡️ Enviando la tarjeta de reporte al usuario");
+
+            await context.sendActivity({
+                attachments: [CardFactory.adaptiveCard(reporteCardJson)]
+            });
+
+            return;
+        }
+
+        // 2️⃣ SUBMIT DE LA TARJETA (cuando el usuario completa)
+        if (context.activity.value?.action === "submitReporte") {
+
             const payload = {
                 usuario: context.activity.from.name,
-                message: text,
-                fecha: new Date().toISOString(),
-                teamsUserId: context.activity.from.id || null,
-                aadObjectId: context.activity.from.aadObjectId || null,
-                conversationId: context.activity.conversation?.id || null,
-                serviceUrl: context.activity.serviceUrl || null
+                categoria: context.activity.value.categoria,
+                unidad: context.activity.value.unidad,
+                id_servicio: context.activity.value.id_servicio,
+                nombre_cliente: context.activity.value.nombre_cliente,
+                telefono_cliente: context.activity.value.telefono_cliente,
+                observacion: context.activity.value.observacion,
+                notificar: context.activity.value.notificar,
+                fecha: new Date().toISOString()
             };
 
-            console.log("📦 Payload enviado al Flow:", payload);
+            console.log("📦 Submit recibido:", payload);
 
-            try {
-                console.log("➡️ Llamando al Flow:", process.env.PA_FLOW_URL);
+            // Enviamos a Power Automate
+            await fetch(process.env.PA_FLOW_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
 
-                const respuesta = await fetch(process.env.PA_FLOW_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload)
-                });
-
-                console.log("➡️ Status Flow:", respuesta.status);
-
-                const raw = await respuesta.text();
-                console.log("📥 Respuesta RAW del Flow:", raw);
-
-                // Intentamos parsear JSON
-                let card = null;
-                try {
-                    card = JSON.parse(raw);
-                } catch {
-                    console.log("⚠️ El Flow no devolvió JSON válido.");
-                }
-
-                // Si el Flow devuelve tarjeta
-                if (card?.attachments?.[0]) {
-                    const original = card.attachments[0];
-
-                    // 🔥 FIX FINAL PARA TEAMS (personal chat)
-                    const attachment = {
-                        contentType: original.contentType,
-                        content: original.content,
-                        contentUrl: null
-                    };
-
-                    console.log("📤 Enviando Adaptive Card final al usuario...");
-
-                    await context.sendActivity({
-                        attachments: [attachment]
-                    });
-
-                } else {
-                    await context.sendActivity("El Flow respondió pero no devolvió una Adaptive Card.");
-                }
-
-                return;
-
-            } catch (err) {
-                console.error("❌ Error llamando al Flow:", err);
-                await context.sendActivity("⚠️ No pude contactar a Power Automate.");
-                return;
-            }
+            await context.sendActivity("✅ Reporte enviado correctamente.");
+            return;
         }
 
         // Respuesta default
-        await context.sendActivity("👋 Hola! Escribí /crearreporte para generar un reporte.");
+        await context.sendActivity("👋 Escribí /crearreporte para generar un reporte.");
     }
 };
 
-// -----------------------------
+// ----------------------------------
 // Endpoint del bot
-// -----------------------------
+// ----------------------------------
 app.post("/api/messages", async (req, res) => {
     await adapter.process(req, res, (context) => bot.run(context));
 });
 
-// -----------------------------
-// Start server
-// -----------------------------
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => console.log(`🚕 TaxiLaser Bot escuchando en puerto ${PORT}`));
