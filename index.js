@@ -8,7 +8,7 @@ const {
 } = require("botbuilder");
 
 /* =============================
-   APP BÁSICA
+   APP
 ============================= */
 const app = express();
 app.use(express.json());
@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 /* =============================
-   CREDENCIALES BOT
+   CREDENCIALES
 ============================= */
 const credentialsFactory = new ConfigurationServiceClientCredentialFactory({
     MicrosoftAppId: process.env.MICROSOFT_APP_ID,
@@ -41,7 +41,7 @@ adapter.onTurnError = async (context, error) => {
 };
 
 /* =============================
-   ADAPTIVE CARD – CREAR REPORTE
+   ADAPTIVE CARD
 ============================= */
 const reporteCardJson = {
     "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
@@ -52,8 +52,7 @@ const reporteCardJson = {
             "type": "TextBlock",
             "text": "📋 Crear Reporte TaxiLaser",
             "weight": "Bolder",
-            "size": "Large",
-            "wrap": true
+            "size": "Large"
         },
         {
             "type": "Input.ChoiceSet",
@@ -69,52 +68,58 @@ const reporteCardJson = {
         },
         {
             "type": "Input.Text",
-            "id": "unidad",
-            "label": "Número de unidad"
-        },
-        {
-            "type": "Input.Text",
-            "id": "id_servicio",
-            "label": "ID de servicio (opcional)"
-        },
-        {
-            "type": "Input.Text",
-            "id": "nombre_cliente",
-            "label": "Nombre del cliente"
-        },
-        {
-            "type": "Input.Text",
-            "id": "telefono_cliente",
-            "label": "Teléfono del cliente"
-        },
-        {
-            "type": "Input.Text",
-            "id": "observacion",
-            "label": "Observación",
-            "isMultiline": true
+            "id": "monto",
+            "label": "Monto (usar solo en Deuda / Saldo a favor)",
+            "placeholder": "$0"
         },
         {
             "type": "Input.ChoiceSet",
-            "id": "notificar",
-            "label": "Notificar a:",
-            "isMultiSelect": true,
+            "id": "tipo_multa",
+            "label": "Tipo de multa (usar solo si categoría = Multa)",
             "choices": [
-                { "title": "PRINCIPALES", "value": "PRINCIPALES" },
-                { "title": "TAXIMETRO", "value": "TAXIMETRO" },
-                { "title": "MANAGERS", "value": "MANAGERS" },
-                { "title": "ADMINISTRACION", "value": "ADMINISTRACION" },
-                { "title": "SUPERVISORES", "value": "SUPERVISORES" },
-                { "title": "REPORTES", "value": "REPORTES" }
+                { "title": "Adulteramiento de documentación - $300", "value": "1060DF|Documentación falsa o alterada|300" },
+                { "title": "Ceder el app a un tercero - $500 por persona", "value": "1060CA|Ceder el app a un tercero|500" },
+                { "title": "Vehículo distinto al sistema - $100", "value": "1060VNR|Vehículo distinto|100" },
+                { "title": "Trabajar acompañado - $100", "value": "1060TA|Trabajar acompañado|100" },
+                { "title": "Vestimenta indebida - $20", "value": "1060VI|Vestimenta indebida|20" },
+                { "title": "No tener tarifario - $10", "value": "1060NTT|No tener tarifario|10" },
+                { "title": "TD5 sin base - $20", "value": "1060TD5|TD5 sin base|20" },
+                { "title": "Vehículo sucio - $20", "value": "1060VS|Vehículo sucio|20" },
+                { "title": "Placa distinta - $50", "value": "1060PNR|Placa distinta|50" },
+                { "title": "Clientes personales - $150", "value": "1060DNT|Clientes personales|150" },
+                { "title": "Teléfono con cliente a bordo - $30", "value": "1060UTCA|Teléfono con cliente|30" },
+                { "title": "Maletero cargado - $20", "value": "1060MO|Maletero cargado|20" },
+                { "title": "Negarse a inspección - $100", "value": "1060NI|Negarse a inspección|100" },
+                { "title": "Sin aire/calefacción - $30", "value": "1060NAA|Sin aire|30" },
+                { "title": "No cerrar en 20 correcto - $20", "value": "1060CS20I|Cerrar mal|20" },
+                { "title": "No tener cambio - $10", "value": "1060NC100|No tener cambio|10" },
+                { "title": "Retirarse sin autorización - $50", "value": "1060CSSA|Retirarse sin autorización|50" },
+                { "title": "No salir a servicio - $20", "value": "1060DS|No salir|20" },
+                { "title": "Falla mecánica - $10", "value": "1060RFM|Falla mecánica|10" },
+                { "title": "No aplicar descuentos - $50", "value": "1060CI|No aplicar descuentos|50" },
+                { "title": "Reclamo cliente - $20", "value": "1060RC|Reclamo cliente|20" },
+                { "title": "Warning operativo - $10", "value": "1060W|Warning|10" },
+                { "title": "Desconectarse con servicio - $5", "value": "1060DASA|Desconectarse|5" },
+                { "title": "Cerrar para evitar servicio - $50", "value": "1060R20|Evitar servicio|50" },
+                { "title": "Late fee/base vencida", "value": "1060LF|Late fee|variable" },
+                { "title": "Cliente distinto - $20", "value": "1060CE|Cliente distinto|20" },
+                { "title": "Re-entrenamiento - $20", "value": "1060RE|Re-entrenamiento|20" },
+                { "title": "Irrespeto a base - $50", "value": "1040CB|Irrespeto|50" },
+                { "title": "No responder copias - $10", "value": "1060NRC|No responder copias|10" },
+                { "title": "Dejar 10-5 compañero - $20", "value": "1060D5C|Dejar 10-5|20" },
+                { "title": "Daño pendiente - $20", "value": "1060RP|Daño pendiente|20" }
             ]
-        }
+        },
+        { "type": "Input.Text", "id": "unidad", "label": "Unidad" },
+        { "type": "Input.Text", "id": "nombre_cliente", "label": "Cliente" },
+        { "type": "Input.Text", "id": "telefono_cliente", "label": "Teléfono" },
+        { "type": "Input.Text", "id": "observacion", "label": "Observación", "isMultiline": true }
     ],
     "actions": [
         {
             "type": "Action.Submit",
             "title": "Enviar Reporte",
-            "data": {
-                "action": "submitReporte"
-            }
+            "data": { "action": "submitReporte" }
         }
     ]
 };
@@ -125,78 +130,43 @@ const reporteCardJson = {
 const bot = {
     async run(context) {
 
-        console.log("📨 ACTIVITY:", JSON.stringify(context.activity, null, 2));
-
         const text = context.activity.text?.trim().toLowerCase() || "";
 
-        /* /crearreporte */
-        if (
-            context.activity.type === "message" &&
-            text === "/crearreporte"
-        ) {
+        if (context.activity.type === "message" && text === "/crearreporte") {
             await context.sendActivity({
-                attachments: [
-                    CardFactory.adaptiveCard(reporteCardJson)
-                ]
+                attachments: [CardFactory.adaptiveCard(reporteCardJson)]
             });
             return;
         }
 
-        /* SUBMIT DE LA CARD */
-        if (
-            context.activity.type === "message" &&
-            context.activity.value?.action === "submitReporte"
-        ) {
-
-            console.log("📦 SUBMIT:", context.activity.value);
+        if (context.activity.type === "message" && context.activity.value?.action === "submitReporte") {
 
             const payload = {
                 usuario: context.activity.from.name,
-                teamsUserId: context.activity.from.id,
-                aadObjectId: context.activity.from.aadObjectId,
-                conversationId: context.activity.conversation.id,
-                serviceUrl: context.activity.serviceUrl,
-
-                categoria: context.activity.value.categoria,
-                unidad: context.activity.value.unidad,
-                id_servicio: context.activity.value.id_servicio,
-                nombre_cliente: context.activity.value.nombre_cliente,
-                telefono_cliente: context.activity.value.telefono_cliente,
-                observacion: context.activity.value.observacion,
-                notificar: context.activity.value.notificar,
-
+                ...context.activity.value,
                 fecha: new Date().toISOString()
             };
 
             await fetch(process.env.PA_FLOW_URL, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
             });
 
             await context.sendActivity("✅ Reporte enviado correctamente.");
-            return;
         }
-
-        /* DEFAULT */
-        await context.sendActivity("👋 Escribí /crearreporte para generar un reporte.");
     }
 };
 
 /* =============================
-   ENDPOINT BOT
+   ENDPOINT
 ============================= */
 app.post("/api/messages", async (req, res) => {
     await adapter.process(req, res, (context) => bot.run(context));
 });
 
 /* =============================
-   START SERVER
+   START
 ============================= */
 const PORT = process.env.PORT || 10000;
-
-app.listen(PORT, () => {
-    console.log(`🚕 TaxiLaser Bot escuchando en puerto ${PORT}`);
-});
+app.listen(PORT, () => console.log(`🚕 TaxiLaser Bot escuchando en ${PORT}`));
