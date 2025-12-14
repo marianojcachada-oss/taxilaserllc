@@ -7,13 +7,18 @@ const {
     CardFactory
 } = require("botbuilder");
 
+/* =============================
+   APP BÁSICA
+============================= */
 const app = express();
 app.use(express.json());
 
-app.get("/", (req, res) => res.status(200).send("TaxiLaser Bot OK"));
+app.get("/", (req, res) => {
+    res.status(200).send("🚕 TaxiLaser Bot OK");
+});
 
 /* =============================
-   Credenciales del bot
+   CREDENCIALES BOT
 ============================= */
 const credentialsFactory = new ConfigurationServiceClientCredentialFactory({
     MicrosoftAppId: process.env.MICROSOFT_APP_ID,
@@ -28,32 +33,15 @@ const botFrameworkAuthentication =
 const adapter = new CloudAdapter(botFrameworkAuthentication);
 
 /* =============================
-   Error global
+   ERROR GLOBAL
 ============================= */
 adapter.onTurnError = async (context, error) => {
     console.error("❌ Error:", error);
-    await context.sendActivity("⚠️ Ocurrió un error.");
+    await context.sendActivity("⚠️ Ocurrió un error inesperado.");
 };
 
 /* =============================
-   Motor de estilo
-============================= */
-function getCardStyleByCategoria(categoria) {
-    switch (categoria) {
-        case "Deuda":
-            return "Attention";
-        case "Warning":
-        case "Multa":
-            return "Warning";
-        case "Saldo a favor":
-            return "Good";
-        default:
-            return "Emphasis";
-    }
-}
-
-/* =============================
-   Adaptive Card - Formulario
+   ADAPTIVE CARD – CREAR REPORTE
 ============================= */
 const reporteCardJson = {
     "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
@@ -64,7 +52,8 @@ const reporteCardJson = {
             "type": "TextBlock",
             "text": "📋 Crear Reporte TaxiLaser",
             "weight": "Bolder",
-            "size": "Large"
+            "size": "Large",
+            "wrap": true
         },
         {
             "type": "Input.ChoiceSet",
@@ -78,10 +67,26 @@ const reporteCardJson = {
             ],
             "value": "Deuda"
         },
-        { "type": "Input.Text", "id": "unidad", "label": "Número de unidad" },
-        { "type": "Input.Text", "id": "id_servicio", "label": "ID de servicio (opcional)" },
-        { "type": "Input.Text", "id": "nombre_cliente", "label": "Nombre del cliente" },
-        { "type": "Input.Text", "id": "telefono_cliente", "label": "Teléfono del cliente" },
+        {
+            "type": "Input.Text",
+            "id": "unidad",
+            "label": "Número de unidad"
+        },
+        {
+            "type": "Input.Text",
+            "id": "id_servicio",
+            "label": "ID de servicio (opcional)"
+        },
+        {
+            "type": "Input.Text",
+            "id": "nombre_cliente",
+            "label": "Nombre del cliente"
+        },
+        {
+            "type": "Input.Text",
+            "id": "telefono_cliente",
+            "label": "Teléfono del cliente"
+        },
         {
             "type": "Input.Text",
             "id": "observacion",
@@ -107,7 +112,9 @@ const reporteCardJson = {
         {
             "type": "Action.Submit",
             "title": "Enviar Reporte",
-            "data": { "action": "submitReporte" }
+            "data": {
+                "action": "submitReporte"
+            }
         }
     ]
 };
@@ -119,24 +126,29 @@ const bot = {
     async run(context) {
 
         console.log("📨 ACTIVITY:", JSON.stringify(context.activity, null, 2));
-        const text = context.activity.text?.trim()?.toLowerCase() || "";
+
+        const text = context.activity.text?.trim().toLowerCase() || "";
 
         /* /crearreporte */
-        if (context.activity.type === "message" && text === "/crearreporte") {
+        if (
+            context.activity.type === "message" &&
+            text === "/crearreporte"
+        ) {
             await context.sendActivity({
-                attachments: [CardFactory.adaptiveCard(reporteCardJson)]
+                attachments: [
+                    CardFactory.adaptiveCard(reporteCardJson)
+                ]
             });
             return;
         }
 
-        /* Submit */
+        /* SUBMIT DE LA CARD */
         if (
             context.activity.type === "message" &&
             context.activity.value?.action === "submitReporte"
         ) {
 
-            const categoria = context.activity.value.categoria;
-            const cardStyle = getCardStyleByCategoria(categoria);
+            console.log("📦 SUBMIT:", context.activity.value);
 
             const payload = {
                 usuario: context.activity.from.name,
@@ -145,17 +157,22 @@ const bot = {
                 conversationId: context.activity.conversation.id,
                 serviceUrl: context.activity.serviceUrl,
 
-                ...context.activity.value,
+                categoria: context.activity.value.categoria,
+                unidad: context.activity.value.unidad,
+                id_servicio: context.activity.value.id_servicio,
+                nombre_cliente: context.activity.value.nombre_cliente,
+                telefono_cliente: context.activity.value.telefono_cliente,
+                observacion: context.activity.value.observacion,
+                notificar: context.activity.value.notificar,
 
-                cardStyle,
                 fecha: new Date().toISOString()
             };
 
-            console.log("📦 Payload enviado:", payload);
-
             await fetch(process.env.PA_FLOW_URL, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 body: JSON.stringify(payload)
             });
 
@@ -163,24 +180,23 @@ const bot = {
             return;
         }
 
+        /* DEFAULT */
         await context.sendActivity("👋 Escribí /crearreporte para generar un reporte.");
     }
 };
 
 /* =============================
-   Endpoint Bot
+   ENDPOINT BOT
 ============================= */
 app.post("/api/messages", async (req, res) => {
     await adapter.process(req, res, (context) => bot.run(context));
 });
 
 /* =============================
-   Server
+   START SERVER
 ============================= */
 const PORT = process.env.PORT || 10000;
+
 app.listen(PORT, () => {
     console.log(`🚕 TaxiLaser Bot escuchando en puerto ${PORT}`);
 });
-
-}
-
