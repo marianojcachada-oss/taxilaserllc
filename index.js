@@ -78,7 +78,7 @@ const reporteCardJson = {
       "color": "accent"
     }
   ],
-  "actions": [
+ "actions": [
   {
     "type": "Action.Submit",
     "title": "Enviar Reporte",
@@ -87,6 +87,7 @@ const reporteCardJson = {
     }
   }
 ]
+
 };
 
 // ----------------------------------
@@ -130,18 +131,29 @@ const bot = {
             console.log("📦 Submit recibido:", payload);
 
             // Enviamos a Power Automate
-            await fetch(process.env.PA_FLOW_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            });
+          if (context.activity.value && context.activity.value.categoria) {
 
-            await context.sendActivity("✅ Reporte enviado correctamente.");
-            return;
-        }
+    console.log("📦 Submit recibido:", context.activity.value);
+
+    const payload = {
+        usuario: context.activity.from.name,
+        ...context.activity.value,
+        fecha: new Date().toISOString()
+    };
+
+    await fetch(process.env.PA_FLOW_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    });
+
+    await context.sendActivity("✅ Reporte enviado correctamente.");
+    return;
+}
+
 
         // Respuesta default
-        await context.sendActivity("👋 Escribí /crearreporte para generar un reporte.");
+        await context.sendActivity("👋 Gracias por usar mis servicios.");
     }
 };
 
