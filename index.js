@@ -79,8 +79,14 @@ const reporteCardJson = {
     }
   ],
   "actions": [
-    { "type": "Action.Submit", "title": "Enviar Reporte" }
-  ]
+  {
+    "type": "Action.Submit",
+    "title": "Enviar Reporte",
+    "data": {
+      "action": "submitReporte"
+    }
+  }
+]
 };
 
 // ----------------------------------
