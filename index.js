@@ -50,7 +50,7 @@ const reporteCardJson = {
     "body": [
         {
             "type": "TextBlock",
-            "text": "📋 Crear Reporte TaxiLaser",
+            "text": "📋 Crear Reporte TaxiLaser by D005",
             "weight": "Bolder",
             "size": "Large"
         },
@@ -108,6 +108,20 @@ const reporteCardJson = {
                 { "title": "No responder copias - $10", "value": "1060NRC|No responder copias|10" },
                 { "title": "Dejar 10-5 compañero - $20", "value": "1060D5C|Dejar 10-5|20" },
                 { "title": "Daño pendiente - $20", "value": "1060RP|Daño pendiente|20" }
+            ]
+        },
+        {
+            "type": "Input.ChoiceSet",
+            "id": "notificar",
+            "label": "Notificar a:",
+            "isMultiSelect": true,
+            "choices": [
+                { "title": "PRINCIPALES", "value": "PRINCIPALES" },
+                { "title": "TAXIMETRO", "value": "TAXIMETRO" },
+                { "title": "MANAGERS", "value": "MANAGERS" },
+                { "title": "ADMINISTRACION", "value": "ADMINISTRACION" },
+                { "title": "SUPERVISORES", "value": "SUPERVISORES" },
+                { "title": "REPORTES", "value": "REPORTES" }
             ]
         },
         { "type": "Input.Text", "id": "unidad", "label": "Unidad" },
@@ -169,4 +183,6 @@ app.post("/api/messages", async (req, res) => {
    START
 ============================= */
 const PORT = process.env.PORT || 10000;
-app.listen(PORT, () => console.log(`🚕 TaxiLaser Bot escuchando en ${PORT}`));
+app.listen(PORT, () =>
+    console.log(`🚕 TaxiLaser Bot escuchando en ${PORT}`)
+);
