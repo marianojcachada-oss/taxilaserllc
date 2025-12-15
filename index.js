@@ -118,8 +118,10 @@ const reporteCardJson = {
             "isMultiSelect": true,
             "choices": [
                 { "title": "PRINCIPALES", "value": "PRINCIPALES" },
+                { "title": "TAXIMETRO", "value": "TAXIMETRO" },
                 { "title": "MANAGERS", "value": "MANAGERS" },
                 { "title": "ADMINISTRACION", "value": "ADMINISTRACION" },
+                { "title": "SUPERVISORES", "value": "SUPERVISORES" },
                 { "title": "REPORTES", "value": "REPORTES" }
             ]
         },
