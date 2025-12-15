@@ -138,6 +138,27 @@ const reporteCardJson = {
     ]
 };
 
+const reporteEnviadoCard = {
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.4",
+    "body": [
+        {
+            "type": "TextBlock",
+            "text": "✅ Reporte enviado correctamente",
+            "weight": "Bolder",
+            "size": "Large",
+            "color": "Good"
+        },
+        {
+            "type": "TextBlock",
+            "text": "Este formulario ya fue procesado y quedó cerrado.",
+            "isSubtle": true,
+            "wrap": true
+        }
+    ]
+};
+
 /* =============================
    BOT LOGIC
 ============================= */
@@ -153,24 +174,39 @@ const bot = {
             return;
         }
 
-        if (context.activity.type === "message" && context.activity.value?.action === "submitReporte") {
+        if (
+    context.activity.type === "message" &&
+    context.activity.value?.action === "submitReporte"
+) {
+    const payload = {
+        usuario: context.activity.from.name,
+        ...context.activity.value,
+        fecha: new Date().toISOString()
+    };
 
-            const payload = {
-                usuario: context.activity.from.name,
-                ...context.activity.value,
-                fecha: new Date().toISOString()
-            };
+    await fetch(process.env.PA_FLOW_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    });
 
-            await fetch(process.env.PA_FLOW_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            });
-
-            await context.sendActivity("✅ Reporte enviado correctamente.");
-        }
+    /* =============================
+       CERRAR / REEMPLAZAR EL CARD
+    ============================= */
+    if (context.activity.replyToId) {
+        await context.updateActivity({
+            id: context.activity.replyToId,
+            type: "message",
+            attachments: [CardFactory.adaptiveCard(reporteEnviadoCard)]
+        });
     }
-};
+
+    /* =============================
+       MENSAJE FINAL
+    ============================= */
+    await context.sendActivity("📨 El reporte fue procesado correctamente.");
+}
+
 
 /* =============================
    ENDPOINT
