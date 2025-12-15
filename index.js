@@ -174,10 +174,8 @@ const bot = {
             return;
         }
 
-        if (
-    context.activity.type === "message" &&
-    context.activity.value?.action === "submitReporte"
-) {
+if (context.activity.type === "message" && context.activity.value?.action === "submitReporte") {
+
     const payload = {
         usuario: context.activity.from.name,
         ...context.activity.value,
@@ -190,16 +188,23 @@ const bot = {
         body: JSON.stringify(payload)
     });
 
-    /* =============================
-       CERRAR / REEMPLAZAR EL CARD
-    ============================= */
-    if (context.activity.replyToId) {
+    // 🔁 Actualizamos el card original
+    const activityId =
+        context.activity.replyToId ||
+        context.turnState.get("reporteCardActivityId");
+
+    if (activityId) {
         await context.updateActivity({
-            id: context.activity.replyToId,
+            id: activityId,
             type: "message",
             attachments: [CardFactory.adaptiveCard(reporteEnviadoCard)]
         });
+    } else {
+        // fallback si no se pudo actualizar
+        await context.sendActivity("✅ Reporte enviado correctamente.");
     }
+}
+
 
     /* =============================
        MENSAJE FINAL
@@ -222,3 +227,4 @@ const PORT = process.env.PORT || 10000;
 app.listen(PORT, () =>
     console.log(`🚕 TaxiLaser Bot escuchando en ${PORT}`)
 );
+
