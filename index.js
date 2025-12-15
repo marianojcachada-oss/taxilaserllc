@@ -41,7 +41,7 @@ adapter.onTurnError = async (context, error) => {
 };
 
 /* =============================
-   ADAPTIVE CARD
+   ADAPTIVE CARD – FORMULARIO
 ============================= */
 const reporteCardJson = {
     "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
@@ -108,6 +108,7 @@ const reporteCardJson = {
                 { "title": "No responder copias - $10", "value": "1060NRC|No responder copias|10" },
                 { "title": "Dejar 10-5 compañero - $20", "value": "1060D5C|Dejar 10-5|20" },
                 { "title": "Daño pendiente - $20", "value": "1060RP|Daño pendiente|20" }
+
             ]
         },
         {
@@ -117,10 +118,8 @@ const reporteCardJson = {
             "isMultiSelect": true,
             "choices": [
                 { "title": "PRINCIPALES", "value": "PRINCIPALES" },
-                { "title": "TAXIMETRO", "value": "TAXIMETRO" },
                 { "title": "MANAGERS", "value": "MANAGERS" },
                 { "title": "ADMINISTRACION", "value": "ADMINISTRACION" },
-                { "title": "SUPERVISORES", "value": "SUPERVISORES" },
                 { "title": "REPORTES", "value": "REPORTES" }
             ]
         },
@@ -138,6 +137,9 @@ const reporteCardJson = {
     ]
 };
 
+/* =============================
+   ADAPTIVE CARD – CERRADO
+============================= */
 const reporteEnviadoCard = {
     "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
     "type": "AdaptiveCard",
@@ -164,54 +166,48 @@ const reporteEnviadoCard = {
 ============================= */
 const bot = {
     async run(context) {
-
         const text = context.activity.text?.trim().toLowerCase() || "";
 
+        /* Mostrar formulario */
         if (context.activity.type === "message" && text === "/crearreporte") {
-            await context.sendActivity({
+            const sent = await context.sendActivity({
                 attachments: [CardFactory.adaptiveCard(reporteCardJson)]
             });
+
+            // Guardamos el ID del mensaje del formulario
+            context.turnState.set("reporteCardActivityId", sent.id);
             return;
         }
 
-if (context.activity.type === "message" && context.activity.value?.action === "submitReporte") {
+        /* Submit del formulario */
+        if (context.activity.value?.action === "submitReporte") {
+            const payload = {
+                usuario: context.activity.from.name,
+                ...context.activity.value,
+                fecha: new Date().toISOString()
+            };
 
-    const payload = {
-        usuario: context.activity.from.name,
-        ...context.activity.value,
-        fecha: new Date().toISOString()
-    };
+            await fetch(process.env.PA_FLOW_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
 
-    await fetch(process.env.PA_FLOW_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-    });
+            const activityId = context.activity.replyToId;
 
-    // 🔁 Actualizamos el card original
-    const activityId =
-        context.activity.replyToId ||
-        context.turnState.get("reporteCardActivityId");
+            // Reemplazamos el card original
+            if (activityId) {
+                await context.updateActivity({
+                    id: activityId,
+                    type: "message",
+                    attachments: [CardFactory.adaptiveCard(reporteEnviadoCard)]
+                });
+            }
 
-    if (activityId) {
-        await context.updateActivity({
-            id: activityId,
-            type: "message",
-            attachments: [CardFactory.adaptiveCard(reporteEnviadoCard)]
-        });
-    } else {
-        // fallback si no se pudo actualizar
-        await context.sendActivity("✅ Reporte enviado correctamente.");
+            return;
+        }
     }
-}
-
-
-    /* =============================
-       MENSAJE FINAL
-    ============================= */
-    await context.sendActivity("📨 El reporte fue procesado correctamente.");
-}
-
+};
 
 /* =============================
    ENDPOINT
@@ -224,7 +220,6 @@ app.post("/api/messages", async (req, res) => {
    START
 ============================= */
 const PORT = process.env.PORT || 10000;
-app.listen(PORT, () =>
-    console.log(`🚕 TaxiLaser Bot escuchando en ${PORT}`)
-);
-
+app.listen(PORT, () => {
+    console.log(`🚕 TaxiLaser Bot escuchando en ${PORT}`);
+});
