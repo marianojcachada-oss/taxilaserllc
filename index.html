@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Tarifas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>🚕 Calculadora de Tarifas</h1>
+
+  <div class="box">
+    <label>Millas</label>
+    <input type="number" id="millas" step="0.1" value="0">
+
+    <label>Paradas</label>
+    <input type="number" id="paradas" value="0">
+  </div>
+
+  <div class="box">
+    <label>Tarifa sin descuento (10 PM – 4 AM)</label>
+    <div id="sin_descuento">—</div>
+
+    <label>Clasificación</label>
+    <div id="clasificacion">—</div>
+
+    <label>Descuento aplicado</label>
+    <div id="descuento">—</div>
+
+    <label>Tarifa con descuento</label>
+    <div id="con_descuento">—</div>
+
+    <label>Tarifa VAN</label>
+    <div id="van">—</div>
+
+    <label>Tarifa de trabajo</label>
+    <div id="trabajo">—</div>
+
+    <label>Tarifa de trabajo VAN</label>
+    <div id="trabajo_van">—</div>
+
+    <label>Delivery comida</label>
+    <div id="delivery_comida">—</div>
+
+    <label>Delivery alcohol / tabaquería</label>
+    <div id="delivery_alcohol">—</div>
+
+    <label>Devolución de objeto perdido</label>
+    <div id="objeto">—</div>
+  </div>
+</div>
+
+<script src="tarifas.js"></script>
+</body>
+</html>

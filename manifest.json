@@ -1,0 +1,8 @@
+"staticTabs": [
+  {
+    "entityId": "calculadora",
+    "name": "Calculadora Tarifas",
+    "contentUrl": "https://localhost:3000/index.html",
+    "scopes": ["personal"]
+  }
+]
