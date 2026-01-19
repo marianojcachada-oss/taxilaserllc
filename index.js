@@ -107,8 +107,8 @@ const reporteCardJson = {
                 { "title": "Irrespeto a base - $50", "value": "1040CB|Irrespeto|50" },
                 { "title": "No responder copias - $10", "value": "1060NRC|No responder copias|10" },
                 { "title": "Dejar 10-5 compañero - $20", "value": "1060D5C|Dejar 10-5|20" },
-                { "title": "Daño pendiente - $20", "value": "1060RP|Daño pendiente|20" }
-
+                { "title": "Daño pendiente - $20", "value": "1060RP|Daño pendiente|20" },
+                { "title": "Mal uso de aplicación - $20-$30 (Consultar admin)", "value": "1060MUA|Mal uso de aplicación|20/30" }
             ]
         },
         {
