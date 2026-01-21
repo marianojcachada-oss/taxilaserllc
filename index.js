@@ -86,7 +86,7 @@ const reporteCardJson = {
                 { "title": "TD5 sin base - $20", "value": "1060TD5|TD5 sin base|20" },
                 { "title": "Vehículo sucio - $20", "value": "1060VS|Vehículo sucio|20" },
                 { "title": "Placa distinta - $50", "value": "1060PNR|Placa distinta|50" },
-                { "title": "Dar número de teléfono / Clientes personales - $150", "value": "1060DNT|Clientes personales|150" },
+                { "title": "Dar número de teléfono, Clientes personales - $150", "value": "1060DNT|Clientes personales|150" },
                 { "title": "Teléfono con cliente a bordo - $30", "value": "1060UTCA|Teléfono con cliente|30" },
                 { "title": "Maletero cargado - $20", "value": "1060MO|Maletero cargado|20" },
                 { "title": "Negarse a inspección - $100", "value": "1060NI|Negarse a inspección|100" },
