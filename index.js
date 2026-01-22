@@ -128,7 +128,7 @@ const reporteCardJson = {
         { "type": "Input.Text", "id": "unidad", "label": "Unidad" },
         { "type": "Input.Text", "id": "nombre_cliente", "label": "Nombre de cliente" },
         { "type": "Input.Text", "id": "telefono_cliente", "label": "Teléfono de cliente" },
-        { "type": "Input.Text", "id": "numero_servicio",  "label": "N° de servicio", "placeholder": "Ej: 304512378", "isRequired": true, "errorMessage": "Debes ingresar el número de servicio"},
+        { "type": "Input.Text", "id": "numero_servicio",  "label": "N° de servicio", "value": "000000000"},
 
         { "type": "Input.Text", "id": "observacion", "label": "Observación", "isMultiline": true }
     ],
