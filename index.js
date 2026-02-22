@@ -126,7 +126,7 @@ const reporteCardJson = {
                 { "title": "REPORTES", "value": "REPORTES" }
             ]
         },
-        { "type": "Input.Text", "id": "unidad", "label": "Unidad" },
+        { "type": "Input.Text", "id": "unidad", "label": "Unidad", "value": "D" },
         { "type": "Input.Text", "id": "nombre_cliente", "label": "Nombre de cliente" },
         { "type": "Input.Text", "id": "telefono_cliente", "label": "Teléfono de cliente" },
         { "type": "Input.Text", "id": "numero_servicio",  "label": "N° de servicio", "value": "S/N"},
