@@ -396,7 +396,11 @@ const reporteCardJson = {
       "spacing": "Medium",
       "items": [
         { "type": "Input.Text", "id": "numero_servicio_deuda", "label": "N° de servicio", "value": "S/N" },
-        { "type": "Input.ChoiceSet", "id": "notificar_deuda", "label": "Notificar a:", "isMultiSelect": true,
+        {
+          "type": "Input.ChoiceSet",
+          "id": "notificar_deuda",
+          "label": "Notificar a:",
+          "isMultiSelect": true,
           "choices": [
             { "title": "PRINCIPALES", "value": "PRINCIPALES" },
             { "title": "TAXIMETRO", "value": "TAXIMETRO" },
@@ -418,7 +422,11 @@ const reporteCardJson = {
       "isVisible": false,
       "items": [
         { "type": "Input.Text", "id": "numero_servicio_saldo", "label": "N° de servicio", "value": "S/N" },
-        { "type": "Input.ChoiceSet", "id": "notificar_saldo", "label": "Notificar a:", "isMultiSelect": true,
+        {
+          "type": "Input.ChoiceSet",
+          "id": "notificar_saldo",
+          "label": "Notificar a:",
+          "isMultiSelect": true,
           "choices": [
             { "title": "PRINCIPALES", "value": "PRINCIPALES" },
             { "title": "TAXIMETRO", "value": "TAXIMETRO" },
@@ -450,10 +458,18 @@ const reporteCardJson = {
       "isVisible": false,
       "items": [
         { "type": "Input.Text", "id": "numero_servicio_multa", "label": "N° de servicio", "value": "S/N" },
-        { "type": "Input.ChoiceSet", "id": "tipo_multa", "label": "Multa", "style": "compact",
-          "choices": [ {"title": "Ejemplo 1", "value": "1"} ]
+        {
+          "type": "Input.ChoiceSet",
+          "id": "tipo_multa",
+          "label": "Multa",
+          "style": "compact",
+          "choices": [ { "title": "Ejemplo 1", "value": "1" } ]
         },
-        { "type": "Input.ChoiceSet", "id": "notificar_multa", "label": "Notificar a:", "isMultiSelect": true,
+        {
+          "type": "Input.ChoiceSet",
+          "id": "notificar_multa",
+          "label": "Notificar a:",
+          "isMultiSelect": true,
           "choices": [
             { "title": "PRINCIPALES", "value": "PRINCIPALES" },
             { "title": "TAXIMETRO", "value": "TAXIMETRO" },
@@ -484,7 +500,11 @@ const reporteCardJson = {
       "isVisible": false,
       "items": [
         { "type": "Input.Text", "id": "numero_servicio_pendiente", "label": "N° de servicio", "value": "S/N" },
-        { "type": "Input.ChoiceSet", "id": "notificar_pendiente", "label": "Notificar a:", "isMultiSelect": true,
+        {
+          "type": "Input.ChoiceSet",
+          "id": "notificar_pendiente",
+          "label": "Notificar a:",
+          "isMultiSelect": true,
           "choices": [
             { "title": "PRINCIPALES", "value": "PRINCIPALES" },
             { "title": "TAXIMETRO", "value": "TAXIMETRO" },
@@ -499,6 +519,15 @@ const reporteCardJson = {
         { "type": "Input.Text", "id": "unidad_pendiente", "label": "Unidad", "value": "D" },
         { "type": "Input.Text", "id": "observacion_pendiente", "label": "Observación a analizar", "isMultiline": true }
       ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Enviar Reporte",
+      "data": {
+        "action": "submitReporte"
+      }
     }
   ]
 };
