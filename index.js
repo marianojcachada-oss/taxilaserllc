@@ -44,102 +44,463 @@ adapter.onTurnError = async (context, error) => {
    ADAPTIVE CARD – FORMULARIO
 ============================= */
 const reporteCardJson = {
-    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-    "type": "AdaptiveCard",
-    "version": "1.4",
-    "body": [
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.4",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "📋 Crear Reporte TaxiLaser",
+      "weight": "Bolder",
+      "size": "Large"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
         {
-            "type": "TextBlock",
-            "text": "📋 Crear Reporte TaxiLaser by D005",
-            "weight": "Bolder",
-            "size": "Large"
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "Container",
+              "id": "deudaOff",
+              "selectAction": {
+                "type": "Action.ToggleVisibility",
+                "targetElements": [
+                  { "elementId": "deudaOn", "isVisible": true },
+                  { "elementId": "deudaOff", "isVisible": false },
+                  { "elementId": "saldoOn", "isVisible": false },
+                  { "elementId": "saldoOff", "isVisible": true },
+                  { "elementId": "warningOn", "isVisible": false },
+                  { "elementId": "warningOff", "isVisible": true },
+                  { "elementId": "multaOn", "isVisible": false },
+                  { "elementId": "multaOff", "isVisible": true },
+                  { "elementId": "llantaOn", "isVisible": false },
+                  { "elementId": "llantaOff", "isVisible": true },
+                  { "elementId": "pendienteOn", "isVisible": false },
+                  { "elementId": "pendienteOff", "isVisible": true },
+                  { "elementId": "formDeuda", "isVisible": true },
+                  { "elementId": "formSaldo", "isVisible": false },
+                  { "elementId": "formWarning", "isVisible": false },
+                  { "elementId": "formMulta", "isVisible": false },
+                  { "elementId": "formLlanta", "isVisible": false },
+                  { "elementId": "formPendiente", "isVisible": false }
+                ]
+              },
+              "items": [
+                { "type": "TextBlock", "text": "Deuda", "horizontalAlignment": "Center" }
+              ]
+            },
+            {
+              "type": "Container",
+              "id": "deudaOn",
+              "isVisible": false,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Deuda",
+                  "weight": "Bolder",
+                  "color": "Good",
+                  "horizontalAlignment": "Center"
+                },
+                {
+                  "type": "Container",
+                  "style": "good",
+                  "minHeight": "3px"
+                }
+              ]
+            }
+          ]
         },
         {
-            "type": "Input.ChoiceSet",
-            "id": "categoria",
-            "label": "Categoría del reporte",
-            "choices": [
-                { "title": "Deuda", "value": "Deuda" },
-                { "title": "Saldo a favor", "value": "Saldo a favor" },
-                { "title": "Warning", "value": "Warning" },
-                { "title": "Multa", "value": "Multa" }
-            ],
-            "value": "Deuda"
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "Container",
+              "id": "saldoOff",
+              "selectAction": {
+                "type": "Action.ToggleVisibility",
+                "targetElements": [
+                  { "elementId": "saldoOn", "isVisible": true },
+                  { "elementId": "saldoOff", "isVisible": false },
+                  { "elementId": "deudaOn", "isVisible": false },
+                  { "elementId": "deudaOff", "isVisible": true },
+                  { "elementId": "warningOn", "isVisible": false },
+                  { "elementId": "warningOff", "isVisible": true },
+                  { "elementId": "multaOn", "isVisible": false },
+                  { "elementId": "multaOff", "isVisible": true },
+                  { "elementId": "llantaOn", "isVisible": false },
+                  { "elementId": "llantaOff", "isVisible": true },
+                  { "elementId": "pendienteOn", "isVisible": false },
+                  { "elementId": "pendienteOff", "isVisible": true },
+                  { "elementId": "formDeuda", "isVisible": false },
+                  { "elementId": "formSaldo", "isVisible": true },
+                  { "elementId": "formWarning", "isVisible": false },
+                  { "elementId": "formMulta", "isVisible": false },
+                  { "elementId": "formLlanta", "isVisible": false },
+                  { "elementId": "formPendiente", "isVisible": false }
+                ]
+              },
+              "items": [
+                { "type": "TextBlock", "text": "Saldo", "horizontalAlignment": "Center" }
+              ]
+            },
+            {
+              "type": "Container",
+              "id": "saldoOn",
+              "isVisible": false,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Saldo",
+                  "weight": "Bolder",
+                  "color": "Good",
+                  "horizontalAlignment": "Center"
+                },
+                {
+                  "type": "Container",
+                  "style": "good",
+                  "minHeight": "3px"
+                }
+              ]
+            }
+          ]
         },
         {
-            "type": "Input.Text",
-            "id": "monto",
-            "label": "Monto (usar solo en Deuda / Saldo a favor)",
-            "placeholder": "$0"
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "Container",
+              "id": "warningOff",
+              "selectAction": {
+                "type": "Action.ToggleVisibility",
+                "targetElements": [
+                  { "elementId": "warningOn", "isVisible": true },
+                  { "elementId": "warningOff", "isVisible": false },
+                  { "elementId": "deudaOn", "isVisible": false },
+                  { "elementId": "deudaOff", "isVisible": true },
+                  { "elementId": "saldoOn", "isVisible": false },
+                  { "elementId": "saldoOff", "isVisible": true },
+                  { "elementId": "multaOn", "isVisible": false },
+                  { "elementId": "multaOff", "isVisible": true },
+                  { "elementId": "llantaOn", "isVisible": false },
+                  { "elementId": "llantaOff", "isVisible": true },
+                  { "elementId": "pendienteOn", "isVisible": false },
+                  { "elementId": "pendienteOff", "isVisible": true },
+                  { "elementId": "formDeuda", "isVisible": false },
+                  { "elementId": "formSaldo", "isVisible": false },
+                  { "elementId": "formWarning", "isVisible": true },
+                  { "elementId": "formMulta", "isVisible": false },
+                  { "elementId": "formLlanta", "isVisible": false },
+                  { "elementId": "formPendiente", "isVisible": false }
+                ]
+              },
+              "items": [
+                { "type": "TextBlock", "text": "Warning", "horizontalAlignment": "Center" }
+              ]
+            },
+            {
+              "type": "Container",
+              "id": "warningOn",
+              "isVisible": false,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Warning",
+                  "weight": "Bolder",
+                  "color": "Good",
+                  "horizontalAlignment": "Center"
+                },
+                {
+                  "type": "Container",
+                  "style": "good",
+                  "minHeight": "3px"
+                }
+              ]
+            }
+          ]
         },
         {
-            "type": "Input.ChoiceSet",
-            "id": "tipo_multa",
-            "label": "Tipo de multa (usar solo si categoría = Multa)",
-            "choices": [
-                { "title": "Adulteramiento de documentación - $300", "value": "1060DF|Documentación falsa o alterada|300" },
-                { "title": "Ceder el app a un tercero - $500 por persona", "value": "1060CA|Ceder el app a un tercero|500" },
-                { "title": "Vehículo distinto al sistema - $100", "value": "1060VNR|Vehículo distinto|100" },
-                { "title": "Trabajar acompañado - $100", "value": "1060TA|Trabajar acompañado|100" },
-                { "title": "Vestimenta indebida - $20", "value": "1060VI|Vestimenta indebida|20" },
-                { "title": "No tener tarifario - $10", "value": "1060NTT|No tener tarifario|10" },
-                { "title": "TD5 sin base - $20", "value": "1060TD5|TD5 sin base|20" },
-                { "title": "Vehículo sucio - $20", "value": "1060VS|Vehículo sucio|20" },
-                { "title": "Placa distinta - $50", "value": "1060PNR|Placa distinta|50" },
-                { "title": "Dar número de teléfono, Clientes personales - $150", "value": "1060DNT|Clientes personales|150" },
-                { "title": "Teléfono con cliente a bordo - $30", "value": "1060UTCA|Teléfono con cliente|30" },
-                { "title": "Maletero cargado - $20", "value": "1060MO|Maletero cargado|20" },
-                { "title": "Negarse a inspección - $100", "value": "1060NI|Negarse a inspección|100" },
-                { "title": "Sin aire/calefacción - $30", "value": "1060NAA|Sin aire|30" },
-                { "title": "No cerrar en 20 correcto - $20", "value": "1060CS20I|Cerrar mal|20" },
-                { "title": "No tener cambio - $10", "value": "1060NC100|No tener cambio|10" },
-                { "title": "Retirarse sin autorización - $50", "value": "1060CSSA|Retirarse sin autorización|50" },
-                { "title": "No salir a servicio - $20", "value": "1060DS|No salir|20" },
-                { "title": "Falla mecánica - $10", "value": "1060RFM|Falla mecánica|10" },
-                { "title": "No aplicar descuentos - $50", "value": "1060CI|No aplicar descuentos|50" },
-                { "title": "Reclamo cliente - $20", "value": "1060RC|Reclamo cliente|20" },
-                { "title": "Warning operativo - $10", "value": "1060W|Warning|10" },
-                { "title": "Desconectarse con servicio - $5", "value": "1060DASA|Desconectarse|5" },
-                { "title": "Cerrar para evitar servicio - $50", "value": "1060R20|Evitar servicio|50" },
-                { "title": "Late fee/base vencida", "value": "1060LF|Late fee|variable" },
-                { "title": "Cliente distinto - $20", "value": "1060CE|Cliente distinto|20" },
-                { "title": "Re-entrenamiento - $20", "value": "1060RE|Re-entrenamiento|20" },
-                { "title": "Irrespeto a base - $50", "value": "1040CB|Irrespeto|50" },
-                { "title": "No responder copias - $10", "value": "1060NRC|No responder copias|10" },
-                { "title": "Dejar 10-5 compañero - $20", "value": "1060D5C|Dejar 10-5|20" },
-                { "title": "Daño pendiente - $20", "value": "1060RP|Daño pendiente|20" },
-                { "title": "Error del Destino - $10", "value": "1060ED|Error destino|10" },
-                { "title": "Mal uso de aplicación - $20-$30 (Consultar admin)", "value": "1060MUA|Mal uso de aplicación|20/30" }
-            ]
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "Container",
+              "id": "multaOff",
+              "selectAction": {
+                "type": "Action.ToggleVisibility",
+                "targetElements": [
+                  { "elementId": "multaOn", "isVisible": true },
+                  { "elementId": "multaOff", "isVisible": false },
+                  { "elementId": "deudaOn", "isVisible": false },
+                  { "elementId": "deudaOff", "isVisible": true },
+                  { "elementId": "saldoOn", "isVisible": false },
+                  { "elementId": "saldoOff", "isVisible": true },
+                  { "elementId": "warningOn", "isVisible": false },
+                  { "elementId": "warningOff", "isVisible": true },
+                  { "elementId": "llantaOn", "isVisible": false },
+                  { "elementId": "llantaOff", "isVisible": true },
+                  { "elementId": "pendienteOn", "isVisible": false },
+                  { "elementId": "pendienteOff", "isVisible": true },
+                  { "elementId": "formDeuda", "isVisible": false },
+                  { "elementId": "formSaldo", "isVisible": false },
+                  { "elementId": "formWarning", "isVisible": false },
+                  { "elementId": "formMulta", "isVisible": true },
+                  { "elementId": "formLlanta", "isVisible": false },
+                  { "elementId": "formPendiente", "isVisible": false }
+                ]
+              },
+              "items": [
+                { "type": "TextBlock", "text": "Multa", "horizontalAlignment": "Center" }
+              ]
+            },
+            {
+              "type": "Container",
+              "id": "multaOn",
+              "isVisible": false,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Multa",
+                  "weight": "Bolder",
+                  "color": "Good",
+                  "horizontalAlignment": "Center"
+                },
+                {
+                  "type": "Container",
+                  "style": "good",
+                  "minHeight": "3px"
+                }
+              ]
+            }
+          ]
         },
         {
-            "type": "Input.ChoiceSet",
-            "id": "notificar",
-            "label": "Notificar a:",
-            "isMultiSelect": true,
-            "choices": [
-                { "title": "PRINCIPALES", "value": "PRINCIPALES" },
-                { "title": "TAXIMETRO", "value": "TAXIMETRO" },
-                { "title": "MANAGERS", "value": "MANAGERS" },
-                { "title": "ADMINISTRACION", "value": "ADMINISTRACION" },
-                { "title": "SUPERVISORES", "value": "SUPERVISORES" },
-                { "title": "REPORTES", "value": "REPORTES" }
-            ]
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "Container",
+              "id": "llantaOff",
+              "selectAction": {
+                "type": "Action.ToggleVisibility",
+                "targetElements": [
+                  { "elementId": "llantaOn", "isVisible": true },
+                  { "elementId": "llantaOff", "isVisible": false },
+                  { "elementId": "deudaOn", "isVisible": false },
+                  { "elementId": "deudaOff", "isVisible": true },
+                  { "elementId": "saldoOn", "isVisible": false },
+                  { "elementId": "saldoOff", "isVisible": true },
+                  { "elementId": "warningOn", "isVisible": false },
+                  { "elementId": "warningOff", "isVisible": true },
+                  { "elementId": "multaOn", "isVisible": false },
+                  { "elementId": "multaOff", "isVisible": true },
+                  { "elementId": "pendienteOn", "isVisible": false },
+                  { "elementId": "pendienteOff", "isVisible": true },
+                  { "elementId": "formDeuda", "isVisible": false },
+                  { "elementId": "formSaldo", "isVisible": false },
+                  { "elementId": "formWarning", "isVisible": false },
+                  { "elementId": "formMulta", "isVisible": false },
+                  { "elementId": "formLlanta", "isVisible": true },
+                  { "elementId": "formPendiente", "isVisible": false }
+                ]
+              },
+              "items": [
+                { "type": "TextBlock", "text": "Llanta", "horizontalAlignment": "Center" }
+              ]
+            },
+            {
+              "type": "Container",
+              "id": "llantaOn",
+              "isVisible": false,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Llanta",
+                  "weight": "Bolder",
+                  "color": "Good",
+                  "horizontalAlignment": "Center"
+                },
+                {
+                  "type": "Container",
+                  "style": "good",
+                  "minHeight": "3px"
+                }
+              ]
+            }
+          ]
         },
-        { "type": "Input.Text", "id": "unidad", "label": "Unidad", "value": "D" },
-        { "type": "Input.Text", "id": "nombre_cliente", "label": "Nombre de cliente" },
-        { "type": "Input.Text", "id": "telefono_cliente", "label": "Teléfono de cliente" },
-        { "type": "Input.Text", "id": "numero_servicio",  "label": "N° de servicio", "value": "S/N"},
-
-        { "type": "Input.Text", "id": "observacion", "label": "Observación", "isMultiline": true }
-    ],
-    "actions": [
         {
-            "type": "Action.Submit",
-            "title": "Enviar Reporte",
-            "data": { "action": "submitReporte" }
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "Container",
+              "id": "pendienteOff",
+              "selectAction": {
+                "type": "Action.ToggleVisibility",
+                "targetElements": [
+                  { "elementId": "pendienteOn", "isVisible": true },
+                  { "elementId": "pendienteOff", "isVisible": false },
+                  { "elementId": "deudaOn", "isVisible": false },
+                  { "elementId": "deudaOff", "isVisible": true },
+                  { "elementId": "saldoOn", "isVisible": false },
+                  { "elementId": "saldoOff", "isVisible": true },
+                  { "elementId": "warningOn", "isVisible": false },
+                  { "elementId": "warningOff", "isVisible": true },
+                  { "elementId": "multaOn", "isVisible": false },
+                  { "elementId": "multaOff", "isVisible": true },
+                  { "elementId": "llantaOn", "isVisible": false },
+                  { "elementId": "llantaOff", "isVisible": true },
+                  { "elementId": "formDeuda", "isVisible": false },
+                  { "elementId": "formSaldo", "isVisible": false },
+                  { "elementId": "formWarning", "isVisible": false },
+                  { "elementId": "formMulta", "isVisible": false },
+                  { "elementId": "formLlanta", "isVisible": false },
+                  { "elementId": "formPendiente", "isVisible": true }
+                ]
+              },
+              "items": [
+                { "type": "TextBlock", "text": "Pendiente", "horizontalAlignment": "Center" }
+              ]
+            },
+            {
+              "type": "Container",
+              "id": "pendienteOn",
+              "isVisible": false,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Pendiente",
+                  "weight": "Bolder",
+                  "color": "Good",
+                  "horizontalAlignment": "Center"
+                },
+                {
+                  "type": "Container",
+                  "style": "good",
+                  "minHeight": "3px"
+                }
+              ]
+            }
+          ]
         }
-    ]
+      ]
+    },
+    {
+      "type": "Container",
+      "id": "formDeuda",
+      "isVisible": false,
+      "spacing": "Medium",
+      "items": [
+        { "type": "Input.Text", "id": "numero_servicio_deuda", "label": "N° de servicio", "value": "S/N" },
+        { "type": "Input.ChoiceSet", "id": "notificar_deuda", "label": "Notificar a:", "isMultiSelect": true,
+          "choices": [
+            { "title": "PRINCIPALES", "value": "PRINCIPALES" },
+            { "title": "TAXIMETRO", "value": "TAXIMETRO" },
+            { "title": "MANAGERS", "value": "MANAGERS" },
+            { "title": "ADMINISTRACION", "value": "ADMINISTRACION" },
+            { "title": "SUPERVISORES", "value": "SUPERVISORES" },
+            { "title": "REPORTES", "value": "REPORTES" }
+          ]
+        },
+        { "type": "Input.Text", "id": "nombre_cliente_deuda", "label": "Nombre de cliente" },
+        { "type": "Input.Text", "id": "telefono_cliente_deuda", "label": "Teléfono de cliente" },
+        { "type": "Input.Text", "id": "monto_deuda", "label": "Monto", "placeholder": "$0" },
+        { "type": "Input.Text", "id": "observacion_deuda", "label": "Observaciones", "isMultiline": true }
+      ]
+    },
+    {
+      "type": "Container",
+      "id": "formSaldo",
+      "isVisible": false,
+      "items": [
+        { "type": "Input.Text", "id": "numero_servicio_saldo", "label": "N° de servicio", "value": "S/N" },
+        { "type": "Input.ChoiceSet", "id": "notificar_saldo", "label": "Notificar a:", "isMultiSelect": true,
+          "choices": [
+            { "title": "PRINCIPALES", "value": "PRINCIPALES" },
+            { "title": "TAXIMETRO", "value": "TAXIMETRO" },
+            { "title": "MANAGERS", "value": "MANAGERS" },
+            { "title": "ADMINISTRACION", "value": "ADMINISTRACION" },
+            { "title": "SUPERVISORES", "value": "SUPERVISORES" },
+            { "title": "REPORTES", "value": "REPORTES" }
+          ]
+        },
+        { "type": "Input.Text", "id": "nombre_cliente_saldo", "label": "Nombre de cliente" },
+        { "type": "Input.Text", "id": "telefono_cliente_saldo", "label": "Teléfono de cliente" },
+        { "type": "Input.Text", "id": "monto_saldo", "label": "Monto", "placeholder": "$0" },
+        { "type": "Input.Text", "id": "observacion_saldo", "label": "Observaciones", "isMultiline": true }
+      ]
+    },
+    {
+      "type": "Container",
+      "id": "formWarning",
+      "isVisible": false,
+      "items": [
+        { "type": "Input.Text", "id": "numero_servicio_warning", "label": "N° de servicio", "value": "S/N" },
+        { "type": "Input.Text", "id": "unidad_warning", "label": "Unidad", "value": "D" },
+        { "type": "Input.Text", "id": "observacion_warning", "label": "Observaciones", "isMultiline": true }
+      ]
+    },
+    {
+      "type": "Container",
+      "id": "formMulta",
+      "isVisible": false,
+      "items": [
+        { "type": "Input.Text", "id": "numero_servicio_multa", "label": "N° de servicio", "value": "S/N" },
+        { "type": "Input.ChoiceSet", "id": "tipo_multa", "label": "Multa", "style": "compact",
+          "choices": [ {"title": "Ejemplo 1", "value": "1"} ]
+        },
+        { "type": "Input.ChoiceSet", "id": "notificar_multa", "label": "Notificar a:", "isMultiSelect": true,
+          "choices": [
+            { "title": "PRINCIPALES", "value": "PRINCIPALES" },
+            { "title": "TAXIMETRO", "value": "TAXIMETRO" },
+            { "title": "MANAGERS", "value": "MANAGERS" },
+            { "title": "ADMINISTRACION", "value": "ADMINISTRACION" },
+            { "title": "SUPERVISORES", "value": "SUPERVISORES" },
+            { "title": "REPORTES", "value": "REPORTES" }
+          ]
+        },
+        { "type": "Input.Text", "id": "nombre_cliente_multa", "label": "Nombre de cliente" },
+        { "type": "Input.Text", "id": "telefono_cliente_multa", "label": "Teléfono de cliente" },
+        { "type": "Input.Text", "id": "unidad_multa", "label": "Unidad", "value": "D" },
+        { "type": "Input.Text", "id": "observacion_multa", "label": "Observaciones", "isMultiline": true }
+      ]
+    },
+    {
+      "type": "Container",
+      "id": "formLlanta",
+      "isVisible": false,
+      "items": [
+        { "type": "Input.Text", "id": "numero_servicio_llanta", "label": "N° de servicio", "value": "S/N" },
+        { "type": "Input.Text", "id": "unidad_llanta", "label": "Unidad", "value": "D" }
+      ]
+    },
+    {
+      "type": "Container",
+      "id": "formPendiente",
+      "isVisible": false,
+      "items": [
+        { "type": "Input.Text", "id": "numero_servicio_pendiente", "label": "N° de servicio", "value": "S/N" },
+        { "type": "Input.ChoiceSet", "id": "notificar_pendiente", "label": "Notificar a:", "isMultiSelect": true,
+          "choices": [
+            { "title": "PRINCIPALES", "value": "PRINCIPALES" },
+            { "title": "TAXIMETRO", "value": "TAXIMETRO" },
+            { "title": "MANAGERS", "value": "MANAGERS" },
+            { "title": "ADMINISTRACION", "value": "ADMINISTRACION" },
+            { "title": "SUPERVISORES", "value": "SUPERVISORES" },
+            { "title": "REPORTES", "value": "REPORTES" }
+          ]
+        },
+        { "type": "Input.Text", "id": "nombre_cliente_pendiente", "label": "Nombre de cliente" },
+        { "type": "Input.Text", "id": "telefono_cliente_pendiente", "label": "Teléfono de cliente" },
+        { "type": "Input.Text", "id": "unidad_pendiente", "label": "Unidad", "value": "D" },
+        { "type": "Input.Text", "id": "observacion_pendiente", "label": "Observación a analizar", "isMultiline": true }
+      ]
+    }
+  ]
 };
 
 /* =============================
