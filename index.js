@@ -87,27 +87,15 @@ const reporteCardJson = {
                   { "elementId": "formPendiente", "isVisible": false }
                 ]
               },
-              "items": [
-                { "type": "TextBlock", "text": "Deuda", "horizontalAlignment": "Center" }
-              ]
+              "items": [ { "type": "TextBlock", "text": "Deuda", "horizontalAlignment": "Center" } ]
             },
             {
               "type": "Container",
               "id": "deudaOn",
               "isVisible": false,
               "items": [
-                {
-                  "type": "TextBlock",
-                  "text": "Deuda",
-                  "weight": "Bolder",
-                  "color": "Good",
-                  "horizontalAlignment": "Center"
-                },
-                {
-                  "type": "Container",
-                  "style": "good",
-                  "minHeight": "3px"
-                }
+                { "type": "TextBlock", "text": "Deuda", "weight": "Bolder", "color": "Good", "horizontalAlignment": "Center" },
+                { "type": "Container", "style": "good", "minHeight": "3px" }
               ]
             }
           ]
@@ -142,27 +130,15 @@ const reporteCardJson = {
                   { "elementId": "formPendiente", "isVisible": false }
                 ]
               },
-              "items": [
-                { "type": "TextBlock", "text": "Saldo", "horizontalAlignment": "Center" }
-              ]
+              "items": [ { "type": "TextBlock", "text": "Saldo", "horizontalAlignment": "Center" } ]
             },
             {
               "type": "Container",
               "id": "saldoOn",
               "isVisible": false,
               "items": [
-                {
-                  "type": "TextBlock",
-                  "text": "Saldo",
-                  "weight": "Bolder",
-                  "color": "Good",
-                  "horizontalAlignment": "Center"
-                },
-                {
-                  "type": "Container",
-                  "style": "good",
-                  "minHeight": "3px"
-                }
+                { "type": "TextBlock", "text": "Saldo", "weight": "Bolder", "color": "Good", "horizontalAlignment": "Center" },
+                { "type": "Container", "style": "good", "minHeight": "3px" }
               ]
             }
           ]
@@ -197,27 +173,15 @@ const reporteCardJson = {
                   { "elementId": "formPendiente", "isVisible": false }
                 ]
               },
-              "items": [
-                { "type": "TextBlock", "text": "Warning", "horizontalAlignment": "Center" }
-              ]
+              "items": [ { "type": "TextBlock", "text": "Warning", "horizontalAlignment": "Center" } ]
             },
             {
               "type": "Container",
               "id": "warningOn",
               "isVisible": false,
               "items": [
-                {
-                  "type": "TextBlock",
-                  "text": "Warning",
-                  "weight": "Bolder",
-                  "color": "Good",
-                  "horizontalAlignment": "Center"
-                },
-                {
-                  "type": "Container",
-                  "style": "good",
-                  "minHeight": "3px"
-                }
+                { "type": "TextBlock", "text": "Warning", "weight": "Bolder", "color": "Good", "horizontalAlignment": "Center" },
+                { "type": "Container", "style": "good", "minHeight": "3px" }
               ]
             }
           ]
@@ -252,27 +216,15 @@ const reporteCardJson = {
                   { "elementId": "formPendiente", "isVisible": false }
                 ]
               },
-              "items": [
-                { "type": "TextBlock", "text": "Multa", "horizontalAlignment": "Center" }
-              ]
+              "items": [ { "type": "TextBlock", "text": "Multa", "horizontalAlignment": "Center" } ]
             },
             {
               "type": "Container",
               "id": "multaOn",
               "isVisible": false,
               "items": [
-                {
-                  "type": "TextBlock",
-                  "text": "Multa",
-                  "weight": "Bolder",
-                  "color": "Good",
-                  "horizontalAlignment": "Center"
-                },
-                {
-                  "type": "Container",
-                  "style": "good",
-                  "minHeight": "3px"
-                }
+                { "type": "TextBlock", "text": "Multa", "weight": "Bolder", "color": "Good", "horizontalAlignment": "Center" },
+                { "type": "Container", "style": "good", "minHeight": "3px" }
               ]
             }
           ]
@@ -307,27 +259,15 @@ const reporteCardJson = {
                   { "elementId": "formPendiente", "isVisible": false }
                 ]
               },
-              "items": [
-                { "type": "TextBlock", "text": "Llanta", "horizontalAlignment": "Center" }
-              ]
+              "items": [ { "type": "TextBlock", "text": "Llanta", "horizontalAlignment": "Center" } ]
             },
             {
               "type": "Container",
               "id": "llantaOn",
               "isVisible": false,
               "items": [
-                {
-                  "type": "TextBlock",
-                  "text": "Llanta",
-                  "weight": "Bolder",
-                  "color": "Good",
-                  "horizontalAlignment": "Center"
-                },
-                {
-                  "type": "Container",
-                  "style": "good",
-                  "minHeight": "3px"
-                }
+                { "type": "TextBlock", "text": "Llanta", "weight": "Bolder", "color": "Good", "horizontalAlignment": "Center" },
+                { "type": "Container", "style": "good", "minHeight": "3px" }
               ]
             }
           ]
@@ -362,27 +302,15 @@ const reporteCardJson = {
                   { "elementId": "formPendiente", "isVisible": true }
                 ]
               },
-              "items": [
-                { "type": "TextBlock", "text": "Pendiente", "horizontalAlignment": "Center" }
-              ]
+              "items": [ { "type": "TextBlock", "text": "Pendiente", "horizontalAlignment": "Center" } ]
             },
             {
               "type": "Container",
               "id": "pendienteOn",
               "isVisible": false,
               "items": [
-                {
-                  "type": "TextBlock",
-                  "text": "Pendiente",
-                  "weight": "Bolder",
-                  "color": "Good",
-                  "horizontalAlignment": "Center"
-                },
-                {
-                  "type": "Container",
-                  "style": "good",
-                  "minHeight": "3px"
-                }
+                { "type": "TextBlock", "text": "Pendiente", "weight": "Bolder", "color": "Good", "horizontalAlignment": "Center" },
+                { "type": "Container", "style": "good", "minHeight": "3px" }
               ]
             }
           ]
@@ -395,31 +323,13 @@ const reporteCardJson = {
       "isVisible": false,
       "spacing": "Medium",
       "items": [
-        { "type": "Input.Text", "id": "numero_servicio_deuda", "label": "N° de servicio", "value": "S/N" },
-        { "type": "Input.ChoiceSet", "id": "notificar_deuda", "label": "Notificar a:", "isMultiSelect": true,
-          "choices": [
-            { "title": "PRINCIPALES", "value": "PRINCIPALES" },
-            { "title": "TAXIMETRO", "value": "TAXIMETRO" },
-            { "title": "MANAGERS", "value": "MANAGERS" },
-            { "title": "ADMINISTRACION", "value": "ADMINISTRACION" },
-            { "title": "SUPERVISORES", "value": "SUPERVISORES" },
-            { "title": "REPORTES", "value": "REPORTES" }
-          ]
-        },
-        { "type": "Input.Text", "id": "nombre_cliente_deuda", "label": "Nombre de cliente" },
-        { "type": "Input.Text", "id": "telefono_cliente_deuda", "label": "Teléfono de cliente" },
-        { "type": "Input.Text", "id": "monto_deuda", "label": "Monto", "placeholder": "$0" },
-        { "type": "Input.Text", "id": "observacion_deuda", "label": "Observaciones", "isMultiline": true },
-        {
-          "type": "ActionSet",
-          "actions": [
-            {
-              "type": "Action.Submit",
-              "title": "Enviar Reporte (Deuda)",
-              "data": { "action": "submitReporte", "categoria": "Deuda" }
-            }
-          ]
-        }
+        { "type": "Input.Text", "id": "numero_servicio", "label": "N° de servicio", "value": "S/N" },
+        { "type": "Input.ChoiceSet", "id": "notificar", "label": "Notificar a:", "isMultiSelect": true, "choices": [ { "title": "PRINCIPALES", "value": "PRINCIPALES" }, { "title": "TAXIMETRO", "value": "TAXIMETRO" }, { "title": "MANAGERS", "value": "MANAGERS" }, { "title": "ADMINISTRACION", "value": "ADMINISTRACION" }, { "title": "SUPERVISORES", "value": "SUPERVISORES" }, { "title": "REPORTES", "value": "REPORTES" } ] },
+        { "type": "Input.Text", "id": "nombre_cliente", "label": "Nombre de cliente" },
+        { "type": "Input.Text", "id": "telefono_cliente", "label": "Teléfono de cliente" },
+        { "type": "Input.Text", "id": "monto", "label": "Monto", "placeholder": "$0" },
+        { "type": "Input.Text", "id": "observacion", "label": "Observaciones", "isMultiline": true },
+        { "type": "ActionSet", "actions": [ { "type": "Action.Submit", "title": "Enviar Reporte (Deuda)", "data": { "action": "submitReporte", "categoria": "Deuda" } } ] }
       ]
     },
     {
@@ -427,31 +337,13 @@ const reporteCardJson = {
       "id": "formSaldo",
       "isVisible": false,
       "items": [
-        { "type": "Input.Text", "id": "numero_servicio_saldo", "label": "N° de servicio", "value": "S/N" },
-        { "type": "Input.ChoiceSet", "id": "notificar_saldo", "label": "Notificar a:", "isMultiSelect": true,
-          "choices": [
-            { "title": "PRINCIPALES", "value": "PRINCIPALES" },
-            { "title": "TAXIMETRO", "value": "TAXIMETRO" },
-            { "title": "MANAGERS", "value": "MANAGERS" },
-            { "title": "ADMINISTRACION", "value": "ADMINISTRACION" },
-            { "title": "SUPERVISORES", "value": "SUPERVISORES" },
-            { "title": "REPORTES", "value": "REPORTES" }
-          ]
-        },
-        { "type": "Input.Text", "id": "nombre_cliente_saldo", "label": "Nombre de cliente" },
-        { "type": "Input.Text", "id": "telefono_cliente_saldo", "label": "Teléfono de cliente" },
-        { "type": "Input.Text", "id": "monto_saldo", "label": "Monto", "placeholder": "$0" },
-        { "type": "Input.Text", "id": "observacion_saldo", "label": "Observaciones", "isMultiline": true },
-        {
-          "type": "ActionSet",
-          "actions": [
-            {
-              "type": "Action.Submit",
-              "title": "Enviar Reporte (Saldo a favor)",
-              "data": { "action": "submitReporte", "categoria": "Saldo a favor" }
-            }
-          ]
-        }
+        { "type": "Input.Text", "id": "numero_servicio", "label": "N° de servicio", "value": "S/N" },
+        { "type": "Input.ChoiceSet", "id": "notificar", "label": "Notificar a:", "isMultiSelect": true, "choices": [ { "title": "PRINCIPALES", "value": "PRINCIPALES" }, { "title": "TAXIMETRO", "value": "TAXIMETRO" }, { "title": "MANAGERS", "value": "MANAGERS" }, { "title": "ADMINISTRACION", "value": "ADMINISTRACION" }, { "title": "SUPERVISORES", "value": "SUPERVISORES" }, { "title": "REPORTES", "value": "REPORTES" } ] },
+        { "type": "Input.Text", "id": "nombre_cliente", "label": "Nombre de cliente" },
+        { "type": "Input.Text", "id": "telefono_cliente", "label": "Teléfono de cliente" },
+        { "type": "Input.Text", "id": "monto", "label": "Monto", "placeholder": "$0" },
+        { "type": "Input.Text", "id": "observacion", "label": "Observaciones", "isMultiline": true },
+        { "type": "ActionSet", "actions": [ { "type": "Action.Submit", "title": "Enviar Reporte (Saldo)", "data": { "action": "submitReporte", "categoria": "Saldo a favor" } } ] }
       ]
     },
     {
@@ -459,19 +351,10 @@ const reporteCardJson = {
       "id": "formWarning",
       "isVisible": false,
       "items": [
-        { "type": "Input.Text", "id": "numero_servicio_warning", "label": "N° de servicio", "value": "S/N" },
-        { "type": "Input.Text", "id": "unidad_warning", "label": "Unidad", "value": "D" },
-        { "type": "Input.Text", "id": "observacion_warning", "label": "Observaciones", "isMultiline": true },
-        {
-          "type": "ActionSet",
-          "actions": [
-            {
-              "type": "Action.Submit",
-              "title": "Enviar Reporte (Warning)",
-              "data": { "action": "submitReporte", "categoria": "Warning" }
-            }
-          ]
-        }
+        { "type": "Input.Text", "id": "numero_servicio", "label": "N° de servicio", "value": "S/N" },
+        { "type": "Input.Text", "id": "unidad", "label": "Unidad", "value": "D" },
+        { "type": "Input.Text", "id": "observacion", "label": "Observaciones", "isMultiline": true },
+        { "type": "ActionSet", "actions": [ { "type": "Action.Submit", "title": "Enviar Reporte (Warning)", "data": { "action": "submitReporte", "categoria": "Warning" } } ] }
       ]
     },
     {
@@ -479,34 +362,14 @@ const reporteCardJson = {
       "id": "formMulta",
       "isVisible": false,
       "items": [
-        { "type": "Input.Text", "id": "numero_servicio_multa", "label": "N° de servicio", "value": "S/N" },
-        { "type": "Input.ChoiceSet", "id": "tipo_multa", "label": "Multa", "style": "compact",
-          "choices": [ {"title": "Ejemplo 1", "value": "1"} ]
-        },
-        { "type": "Input.ChoiceSet", "id": "notificar_multa", "label": "Notificar a:", "isMultiSelect": true,
-          "choices": [
-            { "title": "PRINCIPALES", "value": "PRINCIPALES" },
-            { "title": "TAXIMETRO", "value": "TAXIMETRO" },
-            { "title": "MANAGERS", "value": "MANAGERS" },
-            { "title": "ADMINISTRACION", "value": "ADMINISTRACION" },
-            { "title": "SUPERVISORES", "value": "SUPERVISORES" },
-            { "title": "REPORTES", "value": "REPORTES" }
-          ]
-        },
-        { "type": "Input.Text", "id": "nombre_cliente_multa", "label": "Nombre de cliente" },
-        { "type": "Input.Text", "id": "telefono_cliente_multa", "label": "Teléfono de cliente" },
-        { "type": "Input.Text", "id": "unidad_multa", "label": "Unidad", "value": "D" },
-        { "type": "Input.Text", "id": "observacion_multa", "label": "Observaciones", "isMultiline": true },
-        {
-          "type": "ActionSet",
-          "actions": [
-            {
-              "type": "Action.Submit",
-              "title": "Enviar Reporte (Multa)",
-              "data": { "action": "submitReporte", "categoria": "Multa" }
-            }
-          ]
-        }
+        { "type": "Input.Text", "id": "numero_servicio", "label": "N° de servicio", "value": "S/N" },
+        { "type": "Input.ChoiceSet", "id": "tipo_multa", "label": "Multa", "choices": [ {"title": "Ejemplo 1", "value": "1"} ] },
+        { "type": "Input.ChoiceSet", "id": "notificar", "label": "Notificar a:", "isMultiSelect": true, "choices": [ { "title": "PRINCIPALES", "value": "PRINCIPALES" }, { "title": "TAXIMETRO", "value": "TAXIMETRO" }, { "title": "MANAGERS", "value": "MANAGERS" }, { "title": "ADMINISTRACION", "value": "ADMINISTRACION" }, { "title": "SUPERVISORES", "value": "SUPERVISORES" }, { "title": "REPORTES", "value": "REPORTES" } ] },
+        { "type": "Input.Text", "id": "nombre_cliente", "label": "Nombre de cliente" },
+        { "type": "Input.Text", "id": "telefono_cliente", "label": "Teléfono de cliente" },
+        { "type": "Input.Text", "id": "unidad", "label": "Unidad", "value": "D" },
+        { "type": "Input.Text", "id": "observacion", "label": "Observaciones", "isMultiline": true },
+        { "type": "ActionSet", "actions": [ { "type": "Action.Submit", "title": "Enviar Reporte (Multa)", "data": { "action": "submitReporte", "categoria": "Multa" } } ] }
       ]
     },
     {
@@ -514,18 +377,9 @@ const reporteCardJson = {
       "id": "formLlanta",
       "isVisible": false,
       "items": [
-        { "type": "Input.Text", "id": "numero_servicio_llanta", "label": "N° de servicio", "value": "S/N" },
-        { "type": "Input.Text", "id": "unidad_llanta", "label": "Unidad", "value": "D" },
-        {
-          "type": "ActionSet",
-          "actions": [
-            {
-              "type": "Action.Submit",
-              "title": "Enviar Reporte (Llanta pinchada)",
-              "data": { "action": "submitReporte", "categoria": "Llanta pinchada" }
-            }
-          ]
-        }
+        { "type": "Input.Text", "id": "numero_servicio", "label": "N° de servicio", "value": "S/N" },
+        { "type": "Input.Text", "id": "unidad", "label": "Unidad", "value": "D" },
+        { "type": "ActionSet", "actions": [ { "type": "Action.Submit", "title": "Enviar Reporte (Llanta)", "data": { "action": "submitReporte", "categoria": "Llanta pinchada" } } ] }
       ]
     },
     {
@@ -533,31 +387,13 @@ const reporteCardJson = {
       "id": "formPendiente",
       "isVisible": false,
       "items": [
-        { "type": "Input.Text", "id": "numero_servicio_pendiente", "label": "N° de servicio", "value": "S/N" },
-        { "type": "Input.ChoiceSet", "id": "notificar_pendiente", "label": "Notificar a:", "isMultiSelect": true,
-          "choices": [
-            { "title": "PRINCIPALES", "value": "PRINCIPALES" },
-            { "title": "TAXIMETRO", "value": "TAXIMETRO" },
-            { "title": "MANAGERS", "value": "MANAGERS" },
-            { "title": "ADMINISTRACION", "value": "ADMINISTRACION" },
-            { "title": "SUPERVISORES", "value": "SUPERVISORES" },
-            { "title": "REPORTES", "value": "REPORTES" }
-          ]
-        },
-        { "type": "Input.Text", "id": "nombre_cliente_pendiente", "label": "Nombre de cliente" },
-        { "type": "Input.Text", "id": "telefono_cliente_pendiente", "label": "Teléfono de cliente" },
-        { "type": "Input.Text", "id": "unidad_pendiente", "label": "Unidad", "value": "D" },
-        { "type": "Input.Text", "id": "observacion_pendiente", "label": "Observación a analizar", "isMultiline": true },
-        {
-          "type": "ActionSet",
-          "actions": [
-            {
-              "type": "Action.Submit",
-              "title": "Enviar Reporte (Pendiente)",
-              "data": { "action": "submitReporte", "categoria": "Pendientes de cierre" }
-            }
-          ]
-        }
+        { "type": "Input.Text", "id": "numero_servicio", "label": "N° de servicio", "value": "S/N" },
+        { "type": "Input.ChoiceSet", "id": "notificar", "label": "Notificar a:", "isMultiSelect": true, "choices": [ { "title": "PRINCIPALES", "value": "PRINCIPALES" }, { "title": "TAXIMETRO", "value": "TAXIMETRO" }, { "title": "MANAGERS", "value": "MANAGERS" }, { "title": "ADMINISTRACION", "value": "ADMINISTRACION" }, { "title": "SUPERVISORES", "value": "SUPERVISORES" }, { "title": "REPORTES", "value": "REPORTES" } ] },
+        { "type": "Input.Text", "id": "nombre_cliente", "label": "Nombre de cliente" },
+        { "type": "Input.Text", "id": "telefono_cliente", "label": "Teléfono de cliente" },
+        { "type": "Input.Text", "id": "unidad", "label": "Unidad", "value": "D" },
+        { "type": "Input.Text", "id": "observacion", "label": "Observación a analizar", "isMultiline": true },
+        { "type": "ActionSet", "actions": [ { "type": "Action.Submit", "title": "Enviar Reporte (Pendiente)", "data": { "action": "submitReporte", "categoria": "Pendientes de cierre" } } ] }
       ]
     }
   ]
