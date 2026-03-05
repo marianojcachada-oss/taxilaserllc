@@ -55,17 +55,19 @@ const reporteCardJson = {
             "size": "Large"
         },
         {
-            "type": "Input.ChoiceSet",
-            "id": "categoria",
-            "label": "Categoría del reporte",
-            "choices": [
-                { "title": "Deuda", "value": "Deuda" },
-                { "title": "Saldo a favor", "value": "Saldo a favor" },
-                { "title": "Warning", "value": "Warning" },
-                { "title": "Multa", "value": "Multa" }
-            ],
-            "value": "Deuda"
-        },
+  "type": "Input.ChoiceSet",
+  "id": "categoria",
+  "label": "Categoría del reporte",
+  "choices": [
+      { "title": "Deuda", "value": "Deuda" },
+      { "title": "Saldo a favor", "value": "Saldo a favor" },
+      { "title": "Warning", "value": "Warning" },
+      { "title": "Multa", "value": "Multa" },
+      { "title": "Llanta pinchada", "value": "Llanta pinchada" },
+      { "title": "Caso pendiente de revisión", "value": "PendienteRevision" }
+  ],
+  "value": "Deuda"
+},
         {
             "type": "Input.Text",
             "id": "monto",
